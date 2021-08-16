@@ -1,6 +1,7 @@
 # Тестовое задание Pets
 
 Развёрнутое в DigitalOcean приложение: *46.101.121.211:800*
+
 X-API-KEY: CountryRoadsTakeMeHome
 
 Используется хранилище DigitalOcean
