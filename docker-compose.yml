@@ -2,45 +2,31 @@ version: "3.9"
 
 services:
   db:
-    image: postgres
+    image: library/postgres:13
     restart: always
-    ports:
-      - 5432:5432
     volumes:
     - ./data/db:/var/lib/postgresql/data
     environment:
-      POSTGRES_DB: ${DB_NAME}
-      POSTGRES_USER: ${DB_USER}
+      POSTGRES_DB: pets
+      POSTGRES_USER: django_pets
       POSTGRES_PASSWORD_FILE: /run/secrets/DB_PASSWORD
     secrets:
       - DB_PASSWORD
   web:
     depends_on:
       - db
-    links:
-      - "db:${DB_HOST}"
     image: python:3
     working_dir: /pets
     volumes:
     - ./pets/:/pets
     ports:
-    - 800:${SERVER_PORT}
-    environment:
-      - DEBUG
-      - ALLOWED_HOSTS
-      - USE_S3_STORAGE
-      - AWS_ACCESS_KEY_ID
-      - AWS_S3_ENDPOINT_URL
-      - APP_DB_ENGINE
-      - DB_NAME
-      - DB_USER
-      - DB_HOST
-      - DB_PORT
-      - SECRETS_PATH=/run/secrets
+    - 800:8001
     command: bash -c "
       pip install -r requirements.txt
-      && python manage.py migrate
-      && python manage.py runserver ${SERVER_HOST}:${SERVER_PORT}"
+      && python manage.py migrate --settings=settings.docker
+      && python manage.py runserver --settings=settings.docker 0.0.0.0:8001"
+    environment:
+      SECRETS_PATH: /run/secrets
     secrets:
       - AWS_SECRET_ACCESS_KEY
       - API_KEY

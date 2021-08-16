@@ -1,6 +1,3 @@
-# Thumbnails
-._*
-
 ### Python ###
 __pycache__/
 *.py[cod]
@@ -30,16 +27,10 @@ local_settings.py
 db.sqlite3
 
 # Pets project
-secrets/
-*.secret
-*.env
-!example.env
 /data
-mediafiles/
-
-
-/secrets
+*.secret
+!*.example.secret
 *.env
+!*.example.env
 /data
 mediafiles
-
