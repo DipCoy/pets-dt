@@ -61,7 +61,7 @@ REST API для ведения учёта питомцев (собак и кош
 request body
 ```javascript
 {
-	"name": "Good Boy",
+    "name": "Good Boy",
     "age": 3,
     "type": "dog"
 }
@@ -69,7 +69,7 @@ request body
 response body
 ```javascript
 {
-	"id" "58df3879-d65a-421d-9cb0-3c55e2cac86c",
+    "id" "58df3879-d65a-421d-9cb0-3c55e2cac86c",
     "name": "Good Boy",
     "age": 3,
     "type": "dog",
@@ -86,7 +86,7 @@ response body
 
 ```javascript
 {
-	"id": "c502603a-2fb7-4b4d-8bde-2eb9e0b7f62a",
+    "id": "c502603a-2fb7-4b4d-8bde-2eb9e0b7f62a",
     "url": "https://dipcoy.fra1.digitaloceanspaces.com/pets/mediafiles/1_gCSYcFK.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=4CVAOEWXAGFF2U74SM7S%2F20210816%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20210816T081242Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=cda59e0d77612d455e5f6171166ee70f96563589bfbdba4f2c14e1f61837ba60"
 }
 ```
@@ -110,7 +110,7 @@ response body
 response body
 ```javascript
 {
-	"count": 2,
+    "count": 2,
     "items": [
         {
           "id" "58df3879-d65a-421d-9cb0-3c55e2cac86c",
