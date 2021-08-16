@@ -1,0 +1,57 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    volumes:
+    - ./data/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD_FILE: /run/secrets/DB_PASSWORD
+    secrets:
+      - DB_PASSWORD
+  web:
+    depends_on:
+      - db
+    links:
+      - "db:${DB_HOST}"
+    image: python:3
+    working_dir: /pets
+    volumes:
+    - ./pets/:/pets
+    ports:
+    - 800:${SERVER_PORT}
+    environment:
+      - DEBUG
+      - ALLOWED_HOSTS
+      - USE_S3_STORAGE
+      - AWS_ACCESS_KEY_ID
+      - AWS_S3_ENDPOINT_URL
+      - APP_DB_ENGINE
+      - DB_NAME
+      - DB_USER
+      - DB_HOST
+      - DB_PORT
+      - SECRETS_PATH=/run/secrets
+    command: bash -c "
+      pip install -r requirements.txt
+      && python manage.py migrate
+      && python manage.py runserver ${SERVER_HOST}:${SERVER_PORT}"
+    secrets:
+      - AWS_SECRET_ACCESS_KEY
+      - API_KEY
+      - SECRET_KEY
+      - DB_PASSWORD
+secrets:
+  AWS_SECRET_ACCESS_KEY:
+    file: secrets/aws_secret_access_key.secret
+  API_KEY:
+    file: secrets/api_key.secret
+  DB_PASSWORD:
+    file: secrets/db_password.secret
+  SECRET_KEY:
+    file: secrets/secret_key.secret

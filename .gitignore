@@ -1,0 +1,45 @@
+# Thumbnails
+._*
+
+### Python ###
+__pycache__/
+*.py[cod]
+
+# C extensions
+.so
+
+# Distribution / packaging
+env/
+build/
+dist/
+lib/
+lib64/
+var/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# PyCharm
+.idea/
+
+# Django
+*.log
+*.pit
+local_settings.py
+db.sqlite3
+
+# Pets project
+secrets/
+*.secret
+*.env
+!example.env
+/data
+mediafiles/
+
+
+/secrets
+*.env
+/data
+mediafiles
+
