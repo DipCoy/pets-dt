@@ -26,6 +26,11 @@ services:
       && python manage.py migrate --settings=settings.docker
       && python manage.py runserver --settings=settings.docker 0.0.0.0:8001"
     environment:
+      APP_DB_ENGINE: django.db.backends.postgresql
+      DB_NAME: pets
+      DB_USER: django_pets
+      DB_HOST: db
+      DB_PORT: 5432
       SECRETS_PATH: /run/secrets
     secrets:
       - AWS_SECRET_ACCESS_KEY
